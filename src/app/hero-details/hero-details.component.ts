@@ -21,11 +21,17 @@ export class HeroDetailsComponent {
 
   ngOnInit(): void {
     this.getHero();
+    this.getHeroByName();
   }
 
   getHero(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.heroService.getHero(id).subscribe(hero => this.hero = hero);
+    if(id) this.heroService.getHero(id).subscribe(hero => this.hero = hero);
+  }
+
+  getHeroByName(): void {
+    const url = this.route.snapshot.paramMap.get('url');
+    if(url) this.heroService.getHeroByName(url).subscribe(hero => this.hero = hero); 
   }
 
   goBack(): void {

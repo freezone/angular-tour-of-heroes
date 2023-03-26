@@ -27,5 +27,11 @@ export class HeroService {
     return of(hero);
   }
 
+  getHeroByName(url: string) : Observable<Hero> {
+    const hero = HEROES.find(h => h.url === url)!;
+    this.messageService.add(`HeroService: fetced hero url=${url}`);
+    return of(hero);
+  }
+
   constructor(private messageService: MessageService) { }
 }
