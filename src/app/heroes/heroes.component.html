@@ -1,8 +1,18 @@
 <h2>Heroes List</h2>
+<div>
+    <label for="new-hero">Hero name: </label>
+    <input type="text" id="new-hero" #heroName>
+    <button type="button" (click)="add(heroName.value); heroName.value=''">Add hero</button>
+</div>
+<div>
+    <label for="new-hero-url">Hero name: </label>
+    <input type="text" id="new-hero-url" #heroUrl>
+    <button type="button" (click)="addNameUrl(heroName.value); heroName.value=''">Add hero</button>
+</div>
 <ul class="heroes">
     <li *ngFor="let hero of heroes">
         <a routerLink="/detail/{{ hero.id }}">
-            <span class="badge">{{hero.id}}</span> {{ hero.name }}
+            <span class="badge">{{hero.id}}</span> {{ hero.name }} ({{ hero.url }})
         </a>
     </li>
 </ul>
