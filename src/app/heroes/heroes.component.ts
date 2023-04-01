@@ -20,6 +20,33 @@ export class HeroesComponent {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 
-  constructor(private heroService: HeroService, private messageService: MessageService){}
+  add(name: string): void {
+    name = name.trim();
+    if(!name){return;}
+    this.heroService.addHero({ name } as Hero)
+    .subscribe(hero => {
+      this.heroes.push(hero);
+    })
+  }
+
+  addNameUrl(name: string, url: string): void {
+    name = name.trim();
+    url = url.trim();
+    if(!name || !url){return;}
+    this.heroService.addHeroUrl({ name, url } as Hero)
+    .subscribe(hero => {
+      this.heroes.push(hero);
+    })
+  }
+
+  delete(hero: Hero): void {
+    //this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero.id).subscribe();
+    this.getHeroes();
+  }
+
+  constructor(
+    private heroService: HeroService, 
+    private messageService: MessageService){}
 
 }
