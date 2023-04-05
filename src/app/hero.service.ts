@@ -112,6 +112,20 @@ export class HeroService {
 
   private heroesUrl = 'api/heroes'; // URL to web api
 
+  searchHero(term: string): Observable<Hero[]>{
+    if(!term.trim()){
+      return of([]);
+    } else {
+      return this.http.get<Hero[]>(`${this.heroesUrl}?name=${term}`)
+      .pipe(
+        tap(x => x.length ?
+          this.log(`found heroes matching '${term}'`) :
+          this.log(`no heroes found matching '${term}'`)),
+        catchError( this.handleError<Hero[]>('searchHero', []))
+      );
+    }
+  }
+
   constructor(
     private messageService: MessageService,
     private http: HttpClient) { }
