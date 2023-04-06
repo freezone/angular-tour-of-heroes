@@ -11,12 +11,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
 
-  /*
-  getHeroes() : Hero[] {
-    return HEROES;
-  }
-  */
-
   getHeroes() : Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
     .pipe(
